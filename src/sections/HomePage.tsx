@@ -17,7 +17,7 @@ const HomePage = () => {
     lastVisit: 'N/A',
   });
 
-  const [recentBookings, setRecentBookings] = useState([]);
+  const [recentBookings, setRecentBookings] = useState<any[]>([]);
 
   useEffect(() => {
     if (user) {

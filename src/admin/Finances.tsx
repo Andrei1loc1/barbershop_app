@@ -17,21 +17,26 @@ import {
 
 // Types
 interface Expense {
-  id: number; 
-  description: string; 
-  amount: number; 
-  category: string; 
-  date: string; 
+  id: number;
+  description: string;
+  amount: number;
+  category: string;
+  date: string;
   status: 'paid' | 'pending';
 }
 
 interface Invoice {
-  id: number; 
-  client: string; 
-  amount: number; 
-  services: string; 
-  date: string; 
+  id: number;
+  client: string;
+  amount: number;
+  services: string;
+  date: string;
   status: 'paid' | 'pending';
+}
+
+interface FinancialData {
+  expenses: Expense[];
+  invoices: Invoice[];
 }
 
 // Mobile Cards
@@ -71,7 +76,7 @@ const AdminFinances = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterPeriod, setFilterPeriod] = useState('month');
 
-  const financialData = {
+  const financialData: FinancialData = {
     expenses: [
       { id: 1, description: 'Produse cosmetice', amount: 1250, category: 'Materiale', date: '2025-09-01', status: 'paid' },
       { id: 2, description: 'Chirie spațiu', amount: 3200, category: 'Fixe', date: '2025-09-01', status: 'paid' },

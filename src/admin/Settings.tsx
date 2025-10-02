@@ -22,6 +22,26 @@ interface UserType {
   status: 'active' | 'inactive';
   lastLogin: string;
 }
+interface BusinessSettingsType {
+  general: {
+    businessName: string;
+    address: string;
+    phone: string;
+    email: string;
+    website: string;
+    taxId: string;
+  };
+  workingHours: {
+    monday: { open: string; close: string; enabled: boolean };
+    tuesday: { open: string; close: string; enabled: boolean };
+    wednesday: { open: string; close: string; enabled: boolean };
+    thursday: { open: string; close: string; enabled: boolean };
+    friday: { open: string; close: string; enabled: boolean };
+    saturday: { open: string; close: string; enabled: boolean };
+    sunday: { open: string; close: string; enabled: boolean };
+  };
+  users: UserType[];
+}
 
 const roleColors: Record<UserType['role'], string> = {
   Admin: 'text-purple-400',
@@ -67,7 +87,7 @@ const UserSettingCard: React.FC<{ user: UserType }> = ({ user }) => (
 const AdminSettings = () => {
   const [activeTab, setActiveTab] = useState('general');
 
-  const businessSettings = {
+  const businessSettings: BusinessSettingsType = {
     general: {
       businessName: 'Barbershop Elite',
       address: 'Str. Principală 123, București, România',
