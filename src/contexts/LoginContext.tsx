@@ -55,52 +55,44 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Initial session check
-    const checkSession = async () => {
-      try {
-        const currentUser = await getCurrentUser();
-        if (currentUser) {
-          setIsLoggedIn(true);
-          setUser(currentUser as User);
-        } else {
-          setIsLoggedIn(false);
-        }
-      } catch (error) {
-        console.error('Session check error:', error);
-        setIsLoggedIn(false);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    checkSession();
-
-    // Listen for auth state changes (login, logout, token refresh)
+    setIsLoading(true);
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('Auth state changed:', event, session?.user?.id);
-      
-      if (event === 'SIGNED_IN') {
+
+      const handleUserFetch = async () => {
         try {
           const currentUser = await getCurrentUser();
           if (currentUser) {
             setIsLoggedIn(true);
             setUser(currentUser as User);
+          } else {
+            setIsLoggedIn(false);
+            setUser(null);
           }
         } catch (error) {
-          console.error('Error getting user after sign in:', error);
+          console.error('Error handling user fetch:', error);
+          setIsLoggedIn(false);
+          setUser(null);
+        } finally {
+          if (isLoading) setIsLoading(false);
         }
+      };
+
+      if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        await handleUserFetch();
       } else if (event === 'SIGNED_OUT') {
         setIsLoggedIn(false);
         setUser(null);
-      } else if (event === 'TOKEN_REFRESHED') {
-        // Refresh user data when token is refreshed
-        try {
-          const currentUser = await getCurrentUser();
-          if (currentUser) {
-            setUser(currentUser as User);
+        if (isLoading) setIsLoading(false);
+      }
+      
+      // This is a fallback for the case where INITIAL_SESSION is not fired
+      if (isLoading) {
+        setTimeout(() => {
+          if (isLoading) {
+            setIsLoading(false);
           }
-        } catch (error) {
-          console.error('Error refreshing user data:', error);
-        }
+        }, 300);
       }
     });
 
