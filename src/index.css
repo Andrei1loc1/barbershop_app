@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import "tailwindcss";
+
+.font-pacifico {
+  font-family: var(--font-pacifico);
+}
+.book-btn {
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.raindrop {
+  position: absolute;
+  width: 1px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+
+
+@layer utilities {
+  .navbar {
+    @apply bg-gray-900 text-white p-4 flex justify-around items-center;
+  }
+  .nav-links {
+    @apply space-x-10 inline-flex font-black;
+  }
+  .book-btn {
+    @apply bg-gradient-to-r from-gold-light to-gold text-black font-bold px-6 rounded-4xl hover:bg-gold-light transition;
+  }
+  .book-btn-inverse {
+      @apply inline-block p-[1px] rounded-4xl bg-gold;
+    }
+  .book-btn-inverse > button {
+    @apply px-6 py-2 font-bold rounded-4xl text-gold 
+          backdrop-blur-md bg-[#333B46] hover:bg-[#1A2331] transition;
+  }
+  .hero-section {
+    @apply text-center h-screen bg-cover bg-center text-white items-center flex flex-col justify-center;
+    background-image: url('./assets/images/barberwallpaper.jpg');
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  .services-section {
+    @apply py-12 px-4 bg-gray-100 ;
+  }
+  .services-content {
+    @apply max-w-[80rem] mx-auto mb-12;
+    @apply text-center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  .gallery-section {
+    @apply py-12 px-4 bg-[#111827] text-white;
+  }
+  .gallery-content {
+    @apply max-w-[80rem] mx-auto mb-12;
+    @apply text-center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  .gallery-item {
+    @apply rounded-lg overflow-hidden shadow-lg;
+  }
+    .gallery-image {
+      @apply w-full h-56 object-cover;
+      @apply transition-transform duration-300;
+      &:hover {
+        @apply scale-105;
+      }
+    }
+
+    .dark-glass-card {
+      @apply bg-[#333B46] backdrop-blur-md;
+      @apply rounded-3xl p-6  items-center justify-center;
+      @apply shadow-lg;
+      @apply hover:bg-[#333B46];
+      @apply hover:shadow-xl;
+      @apply cursor-pointer;
+      @apply text-white;
+      @apply transition duration-300;
+    }
+
+    .dark-glass-card2 {
+      @apply bg-[#333B46] backdrop-blur-md;
+      @apply rounded-3xl p-3  items-center justify-center;
+      @apply shadow-lg;
+      @apply hover:bg-[#333B46];
+      @apply hover:shadow-xl;
+      @apply cursor-pointer;
+      @apply text-white;
+      @apply transition duration-300;
+    }
+
+    .light-glass-card {
+      @apply bg-[#51555a]/50 backdrop-blur-md;
+      @apply rounded-xl p-3;
+      @apply shadow-md;
+      @apply hover:bg-gray-800/40;
+      @apply hover:shadow-lg;
+      @apply transition-all duration-300;
+      @apply text-white;
+    }
+
+    .light-glass-icon {
+      @apply bg-yellow-300/10 backdrop-blur-sm;
+      @apply rounded-full p-3;
+      @apply transition-all duration-300;
+      @apply hover:bg-gray-700/40;
+    }
+    .light-glass-icon2 {
+      @apply bg-yellow-300/10 backdrop-blur-sm;
+      @apply rounded-lg px-4 py-2;
+      @apply transition-all duration-300;
+    }
+
+    .table-card {
+      @apply bg-[#333B46] backdrop-blur-md rounded-3xl p-6 shadow-lg text-white transition duration-300;
+    }
+
+  .contact-section {
+    @apply py-12 px-4;
+  }
+  .contact-content {
+    @apply max-w-[80rem] mx-auto;
+    @apply text-center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+  }
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Font families */
+  --font-sans: 'Open Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-montserrat: Montserrat, ui-sans-serif, system-ui, sans-serif;
+  --font-pacifico: Pacifico, cursive;
+
+  /* Culori personalizate - tema ta de black, white și gold */
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gold: #CA8A04;
+  --color-gold-light: #FACC15;
+  --color-gray-100: #F7F7F7;
+  --color-gray-200: #E6E6E6;
+  --color-gray-800: #333333;
+  --color-gray-900: #1A1A1A;
+  --color-graying: rgb(107,114,128);
+
+  /* Spacing scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2.5rem;
+  --spacing-2xl: 4rem;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Box shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  --shadow-gold: 0 4px 14px 0 rgba(212, 175, 55, 0.39);
+}
+
+/* Stiluri de bază */
+:root {
+  color-scheme: light;
+  --background: var(--color-white);
+  --foreground: var(--color-black);
+  --card: var(--color-white);
+  --card-foreground: var(--color-black);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-black);
+  --primary: var(--color-gold);
+  --primary-foreground: var(--color-black);
+  --secondary: var(--color-gray-200);
+  --secondary-foreground: var(--color-gray-900);
+  --muted: var(--color-gray-100);
+  --muted-foreground: var(--color-gray-800);
+  --accent: var(--color-gold-light);
+  --accent-foreground: var(--color-black);
+  --destructive: #ef4444;
+  --destructive-foreground: var(--color-white);
+  --border: var(--color-gray-200);
+  --input: var(--color-gray-200);
+  --ring: var(--color-gold);
+  --radius: var(--radius-md);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: var(--color-black);
+  --foreground: var(--color-white);
+  --card: var(--color-gray-900);
+  --card-foreground: var(--color-white);
+  --popover: var(--color-gray-900);
+  --popover-foreground: var(--color-white);
+  --primary: var(--color-gold);
+  --primary-foreground: var(--color-black);
+  --secondary: var(--color-gray-800);
+  --secondary-foreground: var(--color-white);
+  --muted: var(--color-gray-800);
+  --muted-foreground: var(--color-gray-200);
+  --accent: var(--color-gray-800);
+  --accent-foreground: var(--color-white);
+  --destructive: #7f1d1d;
+  --destructive-foreground: var(--color-white);
+  --border: var(--color-gray-800);
+  --input: var(--color-gray-800);
+  --ring: var(--color-gold);
+}
+
+/* Import fonturi de la Google */
+/* Stiluri de bază */
+* {
+  border-color: var(--border);
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-montserrat);
+}
+
+/* Stiluri personalizate */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animații personalizate */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-20px);}
+  60% {transform: translateY(-10px);}
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+/* Stiluri pentru datepicker */
+.react-datepicker {
+  font-family: var(--font-sans);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.react-datepicker__header {
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+.react-datepicker__day--selected {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: var(--color-gold-light);
+}
+
+/* Dark scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gray-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-800);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-700);
+}
+
+/* Standard scrollbar for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-800) var(--color-gray-900);
+}
+
+/* Custom styles for collapsible admin sidebar */
+.admin-content {
+  margin-left: 16rem; /* 256px, same as w-64 */
+  transition: margin-left 0.3s ease-in-out;
+}
+
+body.sidebar-collapsed .admin-content {
+  margin-left: 3rem; /* 48px, same as w-12 */
+}
