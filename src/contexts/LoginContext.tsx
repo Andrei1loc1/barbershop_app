@@ -139,7 +139,18 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
 
   const loginWithPassword = async (phone: string, password: string): Promise<boolean> => {
     try {
+      // Verifică dacă userul e deja logat
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        console.log("User already logged in:", data.session.user);
+        setIsLoggedIn(true);
+        setUser(data.session.user as User);
+        return true;
+      }
+
+      // Dacă nu e logat, încearcă autentificarea
       const result = await signInWithPhonePassword(phone, password);
+
       if (result && result.user) {
         setIsLoggedIn(true);
         setUser(result.user as User);
@@ -154,6 +165,7 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
       return false;
     }
   };
+
 
   const login = async (phone: string, token: string): Promise<boolean> => {
     try {
